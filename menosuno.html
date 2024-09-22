@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traductor de Palabras a Números</title>
+    <script>
+        function palabrasANumeros(arr) {
+            const numeros = {
+                "cero": 0,
+                "uno": 1,
+                "dos": 2,
+                "tres": 3,
+                "cuatro": 4,
+                "cinco": 5,
+                "seis": 6,
+                "siete": 7,
+                "ocho": 8,
+                "nueve": 9
+            };
+            
+            return arr.map(palabra => numeros[palabra] !== undefined ? numeros[palabra] : -1);
+        }
+
+        function traducir() {
+            const palabras = document.getElementById("input-palabras").value.split(",");
+            const resultado = palabrasANumeros(palabras.map(p => p.trim()));
+            document.getElementById("resultado").innerText = "Resultado: " + resultado.join(", ");
+        }
+    </script>
+</head>
+<body>
+    <h1>Traductor de Palabras a Números</h1>
+    <label for="input-palabras">Introduce palabras (separadas por comas):</label>
+    <input type="text" id="input-palabras" required>
+    <button onclick="traducir()">Traducir</button>
+    <p id="resultado"></p>
+</body>
+</html>

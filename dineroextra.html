@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Horas Extras</title>
+    <script>
+        function calcularPago() {
+            const horasTrabajadas = parseFloat(document.getElementById("horas-trabajadas").value);
+            const pagoPorHora = parseFloat(document.getElementById("pago-por-hora").value);
+            let pagoTotal = 0;
+
+            if (horasTrabajadas > 40) {
+                const horasExtras = horasTrabajadas - 40;
+
+                if (horasExtras <= 8) {
+                    // Pago por horas extras al doble
+                    pagoTotal = (40 * pagoPorHora) + (horasExtras * pagoPorHora * 2);
+                } else {
+                    // Primeras 8 horas extras al doble, resto al triple
+                    const horasExtrasNormales = 8;
+                    const horasExtrasAdicionales = horasExtras - horasExtrasNormales;
+                    pagoTotal = (40 * pagoPorHora) + (horasExtrasNormales * pagoPorHora * 2) + (horasExtrasAdicionales * pagoPorHora * 3);
+                }
+            } else {
+                // Si no hay horas extras
+                pagoTotal = horasTrabajadas * pagoPorHora;
+            }
+
+            document.getElementById("resultado").innerText = "Pago total: $" + pagoTotal.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+    <h1>Cálculo de Horas Extras</h1>
+    <label for="horas-trabajadas">Horas trabajadas:</label>
+    <input type="number" id="horas-trabajadas" required>
+    <br>
+    <label for="pago-por-hora">Pago por hora:</label>
+    <input type="number" id="pago-por-hora" required>
+    <br>
+    <button onclick="calcularPago()">Calcular Pago</button>
+    <p id="resultado"></p>
+</body>
+</html>
